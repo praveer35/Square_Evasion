@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Square Evasion: LVL 8</title>
+		<link rel="stylesheet" type="text/css" href="gamelib.css">
+	</head>
+	<body>
+        <h1>Level 8 - "Too Big to Enter"</h1>
+        <p><i><b>Hint:</b> The<span style="color:green"> green "down arrow" </span>shrinks the square to half its size. The<span style="color:#CCF"> blue "X"</span> reverts it back to its normal size.</i></p>
+        <p><i><b>Hint:</b> The smaller you are, the slower you will move. Small power-ups should be used to go through narrow passageways, and big power-ups should be used to move faster.</i></p>
+		<hr />
+		<canvas style="background-color:#FFDDDD" id="myCanvas" width="990" height="690"></canvas>
+		<audio id="myAudio">
+  			<source src="crasheffect.wav" type="audio/wav">
+  			<source src="crasheffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="victoryAudio">
+  			<source src="wineffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="backgroundAudio">
+			<source src="backmusic2.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="collectAudio">
+			<source src="collecteffect.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<br />
+		<a style="float:left;" href="tutorial.html">&lt; Tutorial</a>
+		<br /><br />
+		<a style="float:left;" href="index.html">&lt; Home Page</a>
+		<a style="float:right;" href="levelselect.html">Level Select &gt;</a>
+		<script type="text/javascript">
+			//Start Positions
+			var x = 30;
+			var y = 30;
+		</script>
+		<script type="text/javascript" src="gamelib.js">
+		</script>
+		<script type="text/javascript">
+			function myLink() {
+				setTimeout(function() { window.location.replace("levelnine.html"); }, 1500);
+			}
+            var originalBlueVelocity = 120;
+			myTimeArea(220, 30);
+            myWall(0, 0, 30, 690);
+            myWall(960, 0, 990, 690);
+            myWall(30, 0, 960, 30);
+            myWall(30, 660, 960, 690);
+            myWall(180, 30, 480, 240);
+            myWall(30, 390, 480, 510);
+            myWall(630, 390, 870, 660);
+            myWall(630, 90, 960, 240);
+            myWall(180, 510, 330, 645);
+            movingEnemyX(30, 180, 150, originalBlueVelocity);
+            movingEnemyX(150, 210, 30, originalBlueVelocity);
+            movingEnemyX(480, 30, 900, 46);
+            movingEnemyX(900, 60, 480, 46);
+			movingEnemyX(30, 300, 930, 60);
+			movingEnemyX(330, 510, 600, 50);
+			movingEnemyX(600, 540, 330, 50);
+			movingEnemyX(330, 570, 600, 50);
+			movingEnemyX(600, 600, 330, 50);
+            movingEnemyY(60, 240, 360, originalBlueVelocity);
+            movingEnemyY(30, 360, 240, originalBlueVelocity);
+            movingEnemyY(90, 360, 240, originalBlueVelocity);
+            movingEnemyY(120, 240, 360, originalBlueVelocity);
+            //movingEnemyY(150, 360, 240, originalBlueVelocity);
+            movingEnemyY(180, 240, 360, originalBlueVelocity);
+            movingEnemyY(210, 360, 240, originalBlueVelocity);
+            movingEnemyY(240, 240, 360, originalBlueVelocity);
+            movingEnemyY(270, 360, 240, originalBlueVelocity);
+            movingEnemyY(300, 240, 360, originalBlueVelocity);
+            movingEnemyY(330, 360, 240, originalBlueVelocity);
+            movingEnemyY(360, 240, 360, originalBlueVelocity);
+            movingEnemyY(390, 360, 240, originalBlueVelocity);
+            movingEnemyY(420, 240, 360, originalBlueVelocity);
+            movingEnemyY(450, 360, 240, originalBlueVelocity);
+            movingEnemyY(150, 30, 360, 150);
+			movingEnemyY(540, 30, 630, 60);
+			movingEnemyY(870, 240, 630, 80);
+			movingEnemyY(900, 570, 240, 93);
+			movingEnemyY(930, 240, 630, 80);
+            myShrink(900, 600);
+            myNormalSize(90, 60);
+            myCoin(90, 540);
+            mySucceed(930, 30, 72.5, 76.8, 82.2, 90, 0, 8);
+			//mySucceed(x, y, aReq, bReq, cReq, dReq, coinReq, LVL);;
+		</script>
+	</body>
+</html>

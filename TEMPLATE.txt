@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html onkeydown="myKey()">
+	<head>
+		<title>Square Evasion: LVL (?)</title>
+		<link rel="stylesheet" type="text/css" href="gamelib.css">
+	</head>
+	<body>
+		<h1>Level (?) - "???"</h1>
+		<hr />
+		<canvas id="myCanvas" width="990" height="690"></canvas>
+		<audio id="myAudio">
+  			<source src="crasheffect.wav" type="audio/wav">
+  			<source src="crasheffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="victoryAudio">
+  			<source src="wineffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="backgroundAudio">
+			<source src="backmusic.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="collectAudio">
+			<source src="collecteffect.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<br />
+		<a href="tutorial.html">< Tutorial</a>
+		<br /><br />
+		<a href="index.html">< Home Page</a>
+		<script type="text/javascript">
+			//Start Positions
+			var x = 0;
+			var y = 0;
+		</script>
+		<script type="text/javascript" src="gamelib.js">
+		</script>
+		<script type="text/javascript">
+			function myLink() {
+				setTimeout(function() { window.location.replace("level???.html"); }, 1500);
+			}
+			//Code goes here...
+		</script>
+	</body>
+</html>

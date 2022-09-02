@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html onkeydown="wallStop()">
+	<head>
+		<title>Square Evasion: LVL 7</title>
+		<link rel="stylesheet" type="text/css" href="gamelib.css">
+	</head>
+	<body>
+		<h1>Level 7 - "Don't Get Caught"</h1>
+		<hr />
+		<canvas style="background-color:#FDD" id="myCanvas" width="990" height="690"></canvas>
+		<audio id="myAudio">
+  			<source src="crasheffect.wav" type="audio/wav">
+  			<source src="crasheffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="victoryAudio">
+  			<source src="wineffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="backgroundAudio">
+			<source src="backmusic2.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="collectAudio">
+			<source src="collecteffect.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<br />
+		<a style="float:left;" href="tutorial.html">&lt; Tutorial</a>
+		<br /><br />
+		<a style="float:left;" href="index.html">&lt; Home Page</a>
+		<a style="float:right;" href="levelselect.html">Level Select &gt;</a>
+		<script type="text/javascript">
+			//Start Positions
+			var x = 60;
+			var y = 630;
+		</script>
+		<script type="text/javascript" src="gamelib.js">
+		</script>
+        <script type="text/javascript">
+			function myLink() {
+				setTimeout(function() { window.location.replace("leveleight.html"); }, 1500);
+			}
+            myTimeArea(740, 215);
+            myWall(0, 0, 30, 690);
+            myWall(960, 0, 990, 690);
+            myWall(30, 0, 960, 30);
+            myWall(30, 660, 960, 690);
+            myWall(30, 450, 660, 510);
+            myWall(330, 210, 960, 270);
+            var timeLimitWall = new myWall(-5000, 0, 0, 690);
+            var wallMove = setInterval(moveTimeLimitWall, 60);
+            var wallVelocity = 0;
+            var wallAcceleration = 0;
+            function moveTimeLimitWall() {
+                wallVelocity += 0.05;
+                wallAcceleration = 0.66 * Math.pow(1.6, wallVelocity - 3);
+                timeLimitWall.coordA += wallAcceleration;
+                timeLimitWall.coordC += wallAcceleration;
+                ctx.fillStyle = "orange";
+                ctx.lineWidth = "5";
+                ctx.fillRect(timeLimitWall.coordA, timeLimitWall.coordB, timeLimitWall.coordC - timeLimitWall.coordA, timeLimitWall.coordD - timeLimitWall.coordB);
+                ctx.strokeRect(timeLimitWall.coordA, timeLimitWall.coordB, timeLimitWall.coordC - timeLimitWall.coordA, timeLimitWall.coordD - timeLimitWall.coordB);
+                if (x < timeLimitWall.coordC) {
+                    myFail();
+                }
+            }
+            movingEnemyX(660, 450, 930, 30);
+            movingEnemyX(930, 480, 660, 30);
+            movingEnemyX(30, 210, 300, 30);
+            movingEnemyX(300, 240, 30, 30);
+            movingEnemyY(300, 510, 630, 150);
+            movingEnemyY(330, 630, 510, 150);
+            movingEnemyY(360, 510, 630, 150);
+            movingEnemyY(390, 630, 510, 150);
+            movingEnemyY(420, 270, 420, 150);
+            movingEnemyY(450, 420, 270, 150);
+            movingEnemyY(480, 270, 420, 150);
+            movingEnemyY(510, 420, 270, 150);
+            movingEnemyY(420, 30, 180, 150);
+            movingEnemyY(450, 180, 30, 150);
+            movingEnemyY(480, 30, 180, 150);
+            movingEnemyY(510, 180, 30, 150);
+            movingEnemyY(540, 30, 180, 150);
+            movingEnemyY(570, 180, 30, 150);
+            movingEnemyY(600, 30, 180, 150);
+            movingEnemyY(630, 180, 30, 150);
+            mySucceed(930, 30, 20, 30, 40, 50, 0, 7);
+            function wallStop() {
+                if (x == 930 && y == 30) {
+                    clearInterval(wallMove);
+                }
+            }
+            //movingEnemyY(480, 30, 30, 150);
+            //movingEnemyY(510, 30, 30, 150);
+			//mySucceed(x, y, aReq, bReq, cReq, dReq, coinReq, LVL);
+		</script>
+	</body>
+</html>

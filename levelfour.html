@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Square Evasion: LVL 4</title>
+		<link rel="stylesheet" type="text/css" href="gamelib.css">
+	</head>
+	<body>
+		<h1>Level 4 - "Batteries"</h1>
+		<hr />
+		<canvas id="myCanvas" width="990" height="690"></canvas>
+		<audio id="myAudio">
+  			<source src="crasheffect.wav" type="audio/wav">
+  			<source src="crasheffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="victoryAudio">
+  			<source src="wineffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="backgroundAudio">
+			<source src="backmusic.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="collectAudio">
+			<source src="collecteffect.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<br />
+		<a style="float:left;" href="tutorial.html">&lt; Tutorial</a>
+		<br /><br />
+		<a style="float:left;" href="index.html">&lt; Home Page</a>
+		<a style="float:right;" href="levelselect.html">Level Select &gt;</a>
+		<script type="text/javascript">
+			//Start Positions
+			var x = 480;
+			var y = 0;
+		</script>
+		<script type="text/javascript" src="gamelib.js">
+		</script>
+		<script type="text/javascript">
+			function myLink() {
+				setTimeout(function() { window.location.replace("levelfive.html"); }, 1500);
+			}
+			myTimeArea(0, 645);
+			myWall(0, 0, 450, 30);
+			myWall(540, 0, 990, 30);
+			myWall(30, 60, 150, 150);
+			myWall(180, 60, 480, 150);
+			myWall(0, 90, 30, 120);
+			myWall(510, 60, 780, 150);
+			myWall(810, 60, 960, 150);
+			myWall(960, 90, 990, 120);
+			myWall(30, 210, 150, 300);
+			myWall(180, 210, 480, 300);
+			myWall(0, 240, 30, 270);
+			myWall(810, 210, 960, 300);
+			myWall(510, 210, 780, 300);
+			myWall(960, 240, 990, 270);
+			myWall(30, 390, 150, 480);
+			myWall(180, 390, 480, 480);
+			myWall(0, 420, 30, 450);
+			myWall(810, 390, 960, 480);
+			myWall(510, 390, 780, 480);
+			myWall(960, 420, 990, 450);
+			myWall(0, 600, 180, 630);
+			myWall(0, 630, 360, 660);
+			myWall(0, 660, 480, 690);
+			myWall(810, 600, 990, 630);
+			myWall(630, 630, 990, 660);
+			myWall(510, 660, 990, 690);
+			movingEnemyX(0, 30, 960, 45);
+			movingEnemyY(150, 30, 120, 60);
+			movingEnemyY(780, 120, 30, 60);
+			movingEnemyX(960, 150, 0, 35);
+			movingEnemyX(0, 180, 960, 35);
+			movingEnemyY(150, 150, 270, 60);
+			movingEnemyY(780, 270, 150, 60);
+			movingEnemyX(960, 300, 0, 35);
+			movingEnemyX(0, 330, 960, 35);
+			movingEnemyX(960, 360, 0, 35);
+			movingEnemyY(150, 300, 450, 55);
+			movingEnemyY(780, 450, 300, 55);
+			movingEnemyX(0, 480, 960, 30);
+			movingEnemyX(960, 510, 0, 30);
+			movingEnemyX(0, 540, 960, 30);
+			movingEnemyX(960, 570, 0, 30);
+			myCoin(0, 60);
+			myCoin(960, 60);
+			myCoin(0, 120);
+			myCoin(960, 120);
+			myCoin(0, 210);
+			myCoin(960, 210);
+			myCoin(0, 270);
+			myCoin(960, 270);
+			myCoin(0, 390);
+			myCoin(960, 390);
+			myCoin(0, 450);
+			myCoin(960, 450);
+			mySucceed(480, 660, 100, 130, 150, 180, 12, 4);
+		</script>
+	</body>
+</html>

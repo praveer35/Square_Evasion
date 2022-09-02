@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html onkeydown="myAnimation()">
+	<head>
+		<title>Square Evasion: LVL2</title>
+		<style type="text/css">
+			canvas	{
+					border: 5px solid black;
+					margin: auto;
+					display: block;}
+			body	{
+					font-family: sans-serif, Verdana;}
+			a	{
+				float: left;
+				text-decoration: none;
+				margin-left: 20px;
+				font-size: 24px;
+				color: red;}
+			a:hover	{
+					color: blue;}
+			h1	{
+				text-align: center;}
+			p	{
+				text-align: center;}
+		</style>
+	</head>
+	<body>
+		<h1>Level 2 - "The Fork"</h1>
+		<hr />
+		<canvas id="myNewCanvas" width="990" height="690"></canvas>
+		<audio id="myAudio">
+  			<source src="crasheffect.wav" type="audio/wav">
+  			<source src="crasheffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="victoryAudio">
+  			<source src="wineffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="backgroundAudio">
+			<source src="backmusic.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<br />
+		<a style="float:left;" href="tutorial.html">&lt; Tutorial</a>
+		<br /><br />
+		<a style="float:left;" href="index.html">&lt; Home Page</a>
+		<a style="float:right;" href="levelselect.html">Level Select &gt;</a>
+		<script type="text/javascript">
+			var crashEffect = document.getElementById("myAudio");
+			var winEffect = document.getElementById("victoryAudio");
+			var musicEffect = document.getElementById("backgroundAudio");
+			musicEffect.loop = true;
+			musicEffect.volume = 0.4;
+			musicEffect.play();
+			var T = 0;
+			var t = 0;
+			var timeScore = setInterval(myTime, 100);
+			function myTime() {
+				t++;
+				if (t == 10) {
+					T++;
+					t = 0;
+				}
+				ctx.clearRect(190, 0, 220, 50);
+				ctx.fillStyle = "black";
+				ctx.font = "30px Lucida Grande";
+				ctx.fillText(T + "." + t + " seconds", 210, 30);
+			}
+			var s = 30;
+			var x = 0;
+			var y = 480;
+			var iCs = 1000;
+			var c = document.getElementById("myNewCanvas");
+			var ctx = c.getContext("2d");
+			var myVelocity = 30;
+			function myAnimation() {
+				//ctx.clearRect(0, 0, 990, 690);
+				if (event.keyCode === 37) {
+					event.preventDefault();
+					if (x == 0) {
+						x = x;
+					}
+					else {
+						x -= myVelocity;
+						ctx.clearRect(x + 30, y, 30, 30);
+					}
+				}
+				if (event.keyCode === 38) {
+					event.preventDefault();
+					if (y == 0) {
+						y = y;
+					}
+					else {
+						y -= myVelocity;
+						ctx.clearRect(x, y + 30, 30, 30);
+					}
+				}
+				if (event.keyCode === 39) {
+					event.preventDefault();
+					if (x == 990 - s) {
+						x = x;
+					}
+					else {
+						x += myVelocity;
+						ctx.clearRect(x - 30, y, 30, 30);
+					}
+				}
+				if (event.keyCode === 40) {
+					event.preventDefault();
+					if (y == 690 - s) {
+						y = y;
+					}
+					else {
+						y += myVelocity;
+						ctx.clearRect(x, y - 30, 30, 30);
+					}
+				}
+				ctx.fillStyle = "red";
+				ctx.strokeStyle = "black";
+				ctx.fillRect(x, y, s, s);
+				//ctx.strokeRect(x, y, s, s);
+				var myUp = y;
+				var myDown = y + 30;
+				var myLeft = x;
+				var myRight = x + 30;
+/*  LVL 1  */	function LvlOne() {
+					if (x == 0) {
+						if (myUp < 480 || myDown > 540) {
+							myFail();
+						}
+					}
+					if ((x >= 30 && x < 150) || (x >= 180 && x < 420) || (x >= 450 && x < 690) || (x >= 720 && x < 960)) {
+						if (myUp < 510 || myDown > 540) {
+							myFail();
+						}
+					}
+					if (x == 150 || x == 420 || x == 690) {
+						if (myUp < 60 || myDown > 570) {
+							myFail();
+						}
+					}
+					if (x == 960) {
+						if (myUp < 60) {
+							myFail();
+						}
+					}
+					if (x == 960 && y == 60) {
+						myWin();
+					}
+				}
+				LvlOne();
+			}
+			function myFail() {
+				musicEffect.pause();
+				crashEffect.volume = 0.3;
+				crashEffect.play();
+				ctx.fillStyle = "red";
+				ctx.font = "100px Verdana";
+				ctx.fillText("You lose!", 280, 150);
+				x = -100;
+				y = -100;		
+				setTimeout(function(){ location.reload(); }, 1000);
+			}
+			function myWin() {
+				musicEffect.pause();
+				winEffect.volume = 1.0;
+				winEffect.play();
+				ctx.fillStyle = "lightgreen";
+				ctx.font = "90px Arial";
+				ctx.fillText("Level 2 Complete!", 100, 150);
+				var score = T + t/10;
+				if (score < 10.5) {
+					var scoreLetter = "A";
+				}
+				if (score >= 10.5 && score < 17.6) {
+					var scoreLetter = "B";
+				}
+				if (score >= 17.6 && score < 20.1) {
+					var scoreLetter = "C";
+				}
+				if (score >= 20.1 && score < 24.3) {
+					var scoreLetter = "D";
+				}
+				if (score >= 24.3) {
+					var scoreLetter = "F";
+				}
+				ctx.fillText("Rank: " + scoreLetter, 100, 250);
+				clearInterval(timeScore);
+				x = -100;
+				y = -100;
+				setTimeout(function() { window.location.replace("levelthree.html"); }, 1500);
+			}
+			ctx.fillStyle = "black";
+			ctx.fillRect(0, 0, 990, 60);
+			ctx.fillRect(0, 570, 960, 150);
+			ctx.fillRect(0, 0, 30, 480);
+			ctx.fillRect(30, 0, 120, 510);
+			ctx.fillRect(180, 0, 240, 510);
+			ctx.fillRect(450, 0, 240, 510);
+			ctx.fillRect(720, 0, 240, 510);
+			ctx.fillRect(0, 540, 150, 30);
+			ctx.fillRect(180, 540, 240, 30);
+			ctx.fillRect(450, 540, 240, 30);
+			ctx.fillRect(720, 540, 240, 30);
+			ctx.fillStyle = "red";
+			ctx.fillRect(x, y, 30, 30);
+			ctx.fillStyle = "lightgreen";
+			ctx.fillRect(960, 60, 30, 30);
+			var enemySpeed = 55;
+			/*function startUp9() {
+			var id9 = setInterval(movingObstacleNine, enemySpeed / 3);
+			var movingXPos5 = 600;
+			function movingObstacleNine() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(movingXPos5, 30, 30, 30);
+				if (movingXPos5 == 960) {
+					clearInterval(id9);
+					startUp10();
+					ctx.clearRect(movingXPos5 - 30, 30, 30, 30);
+				}
+				else {
+					movingXPos5 += 30;
+					ctx.clearRect(movingXPos5 - 60, 30, 30, 30);
+					if (y == 30) {
+						if (x + 30 == movingXPos5 || x == movingXPos5 + 30) {
+							x = -100;
+							y = -100;
+							ctx.fillStyle = "red";
+							ctx.font = "100px Verdana";
+							ctx.fillText("You lose!", 280, 150);
+							setTimeout(function(){ location.reload(); }, iCs);
+						}
+					}
+				}
+			}
+			}
+			function startUp10() {
+			var id10 = setInterval(movingObstacleTen, enemySpeed / 3);
+			var movingXPos6 = 960;
+			function movingObstacleTen() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(movingXPos6, 30, 30, 30);
+				if (movingXPos6 == 600) {
+					clearInterval(id10);
+					startUp9();
+					ctx.clearRect(movingXPos6 + 30, 30, 30, 30);
+				}
+				else {
+					movingXPos6 -= 30;
+					ctx.clearRect(movingXPos6 + 60, 30, 30, 30);
+					if (y == 30) {
+						if (x + 30 == movingXPos6 || x == movingXPos6 + 30) {
+							x = -100;
+							y = -100;
+							ctx.fillStyle = "red";
+							ctx.font = "100px Verdana";
+							ctx.fillText("You lose!", 280, 150);
+							setTimeout(function(){ location.reload(); }, iCs);
+						}
+					}
+				}
+			}
+			}
+			*/
+			function startUp5() {
+			var id5 = setInterval(movingObstacleFive, enemySpeed + 20);
+			var movingYPos = 60;
+			function movingObstacleFive() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(420, movingYPos, 30, 30);
+				if (movingYPos == 540) {
+					clearInterval(id5);
+					startUp6();
+					ctx.clearRect(420, movingYPos - 30, 30, 30);
+				}
+				else {
+					movingYPos += 30;
+					ctx.clearRect(420, movingYPos - 60, 30, 30);
+					if (x == 420) {
+						if (y + 30 == movingYPos || y == movingYPos + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos5yeah").innerHTML = movingYPos;
+				}
+				ctx.fillStyle = "black";
+				ctx.fillRect(150, 570, 30, 30);
+			}
+			}
+			startUp5();
+			function startUp6() {
+			var id6 = setInterval(movingObstacleSix, enemySpeed + 20);
+			var movingYPos2 = 540;
+			function movingObstacleSix() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(420, movingYPos2, 30, 30);
+				if (movingYPos2 == 60) {
+					clearInterval(id6);
+					startUp5();
+					ctx.clearRect(420, movingYPos2 + 30, 30, 30);
+				}
+				else {
+					movingYPos2 -= 30;
+					ctx.clearRect(420, movingYPos2 + 60, 30, 30);
+					if (x == 420) {
+						if (y + 30 == movingYPos2 || y == movingYPos2 + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos6yeah").innerHTML = movingYPos2;
+				}
+				ctx.fillStyle = "black";
+				ctx.fillRect(150, 30, 30, 30);
+			}
+			}
+			function startUp7() {
+			var id7 = setInterval(movingObstacleSeven, enemySpeed + 20);
+			var movingYPos3 = 60;
+			function movingObstacleSeven() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(150, movingYPos3, 30, 30);
+				if (movingYPos3 == 540) {
+					clearInterval(id7);
+					startUp8();
+					ctx.clearRect(150, movingYPos3 - 30, 30, 30);
+				}
+				else {
+					movingYPos3 += 30;
+					ctx.clearRect(150, movingYPos3 - 60, 30, 30);
+					if (x == 150) {
+						if (y + 30 == movingYPos3 || y == movingYPos3 + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos5yeah").innerHTML = movingYPos;
+				}
+				ctx.fillStyle = "black";
+				ctx.fillRect(420, 570, 30, 30);
+			}
+			}
+			startUp8();
+			function startUp8() {
+			var id8 = setInterval(movingObstacleEight, enemySpeed + 20);
+			var movingYPos4 = 540;
+			function movingObstacleEight() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(150, movingYPos4, 30, 30);
+				if (movingYPos4 == 60) {
+					clearInterval(id8);
+					startUp7();
+					ctx.clearRect(150, movingYPos4 + 30, 30, 30);
+				}
+				else {
+					movingYPos4 -= 30;
+					ctx.clearRect(150, movingYPos4 + 60, 30, 30);
+					if (x == 150) {
+						if (y + 30 == movingYPos4 || y == movingYPos4 + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos6yeah").innerHTML = movingYPos2;
+				}
+				ctx.fillStyle = "black";
+				ctx.fillRect(420, 30, 30, 30);
+			}
+			}
+			function startUp9() {
+			var id9 = setInterval(movingObstacleNine, enemySpeed + 18);
+			var movingYPos5 = 60;
+			function movingObstacleNine() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(690, movingYPos5, 30, 30);
+				if (movingYPos5 == 540) {
+					clearInterval(id9);
+					startUp10();
+					ctx.clearRect(690, movingYPos5 - 30, 30, 30);
+				}
+				else {
+					movingYPos5 += 30;
+					ctx.clearRect(690, movingYPos5 - 60, 30, 30);
+					if (x == 690) {
+						if (y + 30 == movingYPos5 || y == movingYPos5 + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos5yeah").innerHTML = movingYPos;
+				}
+				ctx.fillStyle = "black";
+				ctx.fillRect(690, 30, 30, 30);
+			}
+			}
+			startUp9();
+			function startUp10() {
+			var id10 = setInterval(movingObstacleTen, enemySpeed + 18);
+			var movingYPos6 = 540;
+			function movingObstacleTen() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(690, movingYPos6, 30, 30);
+				if (movingYPos6 == 60) {
+					clearInterval(id10);
+					startUp9();
+					ctx.clearRect(690, movingYPos6 + 30, 30, 30);
+				}
+				else {
+					movingYPos6 -= 30;
+					ctx.clearRect(690, movingYPos6 + 60, 30, 30);
+					if (x == 690) {
+						if (y + 30 == movingYPos6 || y == movingYPos6 + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos6yeah").innerHTML = movingYPos2;
+				}
+				ctx.fillStyle = "black";
+				ctx.fillRect(690, 570, 30, 30);
+			}
+			}
+			function startUp11() {
+			var id11 = setInterval(movingObstacleEleven, enemySpeed + 28);
+			var movingYPos7 = 120;
+			function movingObstacleEleven() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(960, movingYPos7, 30, 30);
+				if (movingYPos7 == 660) {
+					clearInterval(id11);
+					startUp12();
+					ctx.clearRect(960, movingYPos7 - 30, 30, 30);
+				}
+				else {
+					movingYPos7 += 30;
+					ctx.clearRect(960, movingYPos7 - 60, 30, 30);
+					if (x == 960) {
+						if (y + 30 == movingYPos7 || y == movingYPos7 + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos5yeah").innerHTML = movingYPos;
+				}
+			}
+			}
+			startUp11();
+			function startUp12() {
+			var id12 = setInterval(movingObstacleTwelve, enemySpeed + 28);
+			var movingYPos8 = 660;
+			function movingObstacleTwelve() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(960, movingYPos8, 30, 30);
+				if (movingYPos8 == 120) {
+					clearInterval(id12);
+					startUp11();
+					ctx.clearRect(960, movingYPos8 + 30, 30, 30);
+				}
+				else {
+					movingYPos8 -= 30;
+					ctx.clearRect(960, movingYPos8 + 60, 30, 30);
+					if (x == 960) {
+						if (y + 30 == movingYPos8 || y == movingYPos8 + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos6yeah").innerHTML = movingYPos2;
+				}
+			}
+			}
+			/*
+			function startUp7() {
+			var id7 = setInterval(movingObstacleSeven, enemySpeed + 20);
+			var movingYPos3 = 0;
+			function movingObstacleSeven() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(510, movingYPos3, 30, 30);
+				if (movingYPos3 == 390) {
+					clearInterval(id7);
+					startUp8();
+					ctx.clearRect(510, movingYPos3 - 30, 30, 30);
+				}
+				else {
+					movingYPos3 += 30;
+					ctx.clearRect(510, movingYPos3 - 60, 30, 30);
+					if (x == 510) {
+						if (y + 30 == movingYPos3 || y == movingYPos3 + 30) {
+							x = -100;
+							y = -100;
+							//alert("You died");
+							ctx.fillStyle = "red";
+							ctx.font = "100px Verdana";
+							ctx.fillText("You lose!", 280, 150);
+							setTimeout(function(){ location.reload(); }, iCs);
+						}
+					}
+					//document.getElementById("pos5yeah").innerHTML = movingYPos;
+				}
+				if (x == 540) {
+					clearInterval(id7);
+					startUp10();
+				}
+			}
+			}
+			//startUp6();
+			function startUp8() {
+			ctx.clearRect(510, 390, 30, 30);
+			var id8 = setInterval(movingObstacleEight, enemySpeed + 20);
+			var movingYPos4 = 390;
+			function movingObstacleEight() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(510, movingYPos4, 30, 30);
+				if (movingYPos4 == 0) {
+					clearInterval(id8);
+					startUp7();
+					ctx.clearRect(510, movingYPos4 + 30, 30, 30);
+				}
+				else {
+					movingYPos4 -= 30;
+					ctx.clearRect(510, movingYPos4 + 60, 30, 30);
+					if (x == 510) {
+						if (y + 30 == movingYPos4 || y == movingYPos4 + 30) {
+							x = -100;
+							y = -100;
+							//alert("You died");
+							ctx.fillStyle = "red";
+							ctx.font = "100px Verdana";
+							ctx.fillText("You lose!", 280, 150);
+							setTimeout(function(){ location.reload(); }, iCs);
+						}
+					}
+					//document.getElementById("pos6yeah").innerHTML = movingYPos2;
+				}
+				if (x == 540) {
+					clearInterval(id8);
+					startUp10();
+				}
+			}
+			}
+			*/
+			function startUp() {
+			var id = setInterval(movingObstacleOne, enemySpeed / 1.5);
+			var movingXPos = 0;
+			function movingObstacleOne() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(movingXPos, 510, 30, 30);
+				if (movingXPos == 960) {
+					clearInterval(id);
+					startUp2();
+					ctx.clearRect(movingXPos - 30, 510, 30, 30);
+				}
+				else {
+					movingXPos += 30;
+					ctx.clearRect(movingXPos - 60, 510, 30, 30);
+					if (y == 510) {
+						if (x + 30 == movingXPos || x == movingXPos + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos1yeah").innerHTML = movingXPos;
+				}
+			}
+			}
+			startUp2();
+			function startUp2() {
+			var id2 = setInterval(movingObstacleTwo, enemySpeed / 1.5);
+			var movingXPos2 = 960;
+			function movingObstacleTwo() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(movingXPos2, 510, 30, 30);
+				if (movingXPos2 == 0) {
+					clearInterval(id2);
+					startUp();
+					ctx.clearRect(movingXPos2 + 30, 510, 30, 30);
+				}
+				else {
+					movingXPos2 -= 30;
+					ctx.clearRect(movingXPos2 + 60, 510, 30, 30);
+					if (y == 510) {
+						if (x + 30 == movingXPos2 || x == movingXPos2 + 30) {
+							myFail();
+						}
+					}
+					//document.getElementById("pos2yeah").innerHTML = movingXPos2;
+				}
+			}
+			/*
+			function startUp3() {
+			var id3 = setInterval(movingObstacleThree, enemySpeed);
+			var movingXPos3 = 0;
+			function movingObstacleThree() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(movingXPos3, 450, 30, 30);
+				if (movingXPos3 == 450) {
+					clearInterval(id3);
+					startUp4();
+					ctx.clearRect(movingXPos3 - 30, 450, 30, 30);
+				}
+				else {
+					movingXPos3 += 30;
+					ctx.clearRect(movingXPos3 - 60, 450, 30, 30);
+					if (y == 450) {
+						if (x + 30 == movingXPos3 || x == movingXPos3 + 30) {
+							x = -100;
+							y = -100;
+							//alert("You died");
+							ctx.fillStyle = "red";
+							ctx.font = "100px Verdana";
+							ctx.fillText("You lose!", 280, 150);
+							setTimeout(function(){ location.reload(); }, iCs);
+						}
+					}
+					//document.getElementById("pos3yeah").innerHTML = movingXPos3;
+				}
+				if (x == 480) {
+					clearInterval(id3);
+					startUp6();
+					startUp7();
+					}
+			}
+			}
+			startUp3();
+			function startUp4() {
+			var id4 = setInterval(movingObstacleFour, enemySpeed);
+			var movingXPos4 = 480;
+			function movingObstacleFour() {
+				ctx.fillStyle = "blue";
+				ctx.fillRect(movingXPos4, 450, 30, 30);
+				if (movingXPos4 == 0) {
+					clearInterval(id4);
+					startUp3();
+					ctx.clearRect(movingXPos4 + 30, 450, 480 - movingXPos4, 30);
+				}
+				else {
+					movingXPos4 -= 30;
+					ctx.clearRect(movingXPos4 + 60, 450, 480 - movingXPos4, 30);
+					if (y == 450) {
+						if (x + 30 == movingXPos4 || x == movingXPos4 + 30) {
+							x = -100;
+							y = -100;
+							//alert("You died");
+							ctx.fillStyle = "red";
+							ctx.font = "100px Verdana";
+							ctx.fillText("You lose!", 280, 150);
+							setTimeout(function(){ location.reload(); }, iCs);
+						}
+					}
+					//document.getElementById("pos4yeah").innerHTML = movingXPos4;
+				}
+				if (x == 480) {
+					clearInterval(id4);
+					startUp6();
+					startUp7();
+					}
+			}
+			}
+			*/
+			}
+			
+// This is where All the testing goes
+			/*function temporary() {
+				alert("x = " + x + " and y = " + y);
+			}*/
+		</script>
+		<!-- <button type="button" onclick="temporary()">click here</button> -->
+		<!-- <a href="levelone.html">back</a> -->
+	</body>
+</html>

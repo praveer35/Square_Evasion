@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Square Evasion: Tutorial</title>
+		<style type="text/css">
+			body	{
+					font-family: sans-serif, Verdana;
+					text-align: center;}
+			p	{
+				text-align: left;
+				margin-left: 20px;
+				margin-right: 20px;}
+			a	{
+				float: left;
+				text-decoration: none;
+				margin-left: 20px;
+				font-size: 24px;
+				color: red;}
+			a:hover	{
+					color: blue;}
+			canvas	{
+					float: left;
+					margin-left: 25%;
+					margin-top: 50px;}
+			#speedCanvas	{
+							margin-left: 5%;}
+			#RInstruction	{
+							font-family: monospace, Courier;
+							color: blue;
+							float: right;
+							margin-right: 20%;
+							margin-top: 50px;}
+			#container	{
+						margin-bottom: 50px;
+						background-color: #99DDFF;
+						border: 3px solid blue;
+						border-radius: 25px;
+						width: 100%;
+						height: 500px;}
+		</style>
+	</head>
+	<body>
+		<h1>Square Evasion: Tutorial</h1>
+		<hr />
+		<br />
+		<a href="index.html">&lt; Go Back</a>
+		<br />
+		<h2>Controls</h2>
+		<p>You will be controlling a red square with the arrow keys <img src="arrowkeys.png" width="50" height="36" />.
+		Use the <img src="leftkey.jpg" width="20" height="20" /> to move left, the <img src="rightkey.jpg" width="20" height="20" /> 
+		to move right, the <img src="downkey.jpg" width="20" height="20" /> to go down, and the <img src="upkey.jpg" width="20" height="20" /> 
+		to go up. Make sure that the speed of your square matches the recommended speed for perfect gameplay. If it is not about
+		the same, then change the keyboard settings on your computer.</p>
+		<div id="container">
+			<canvas id="controlCanvas" width="390" height="390" style="border:2px solid black;"></canvas>
+		<div id="RInstruction">
+			<p id="instruction"></p>
+		</div>
+		</div>
+		<div id="container">
+		<canvas id="speedCanvas" width="810" height="390" style="border:2px solid black;"></canvas>
+		<div id="RInstruction">
+			<p id="instruction2"></p>
+		</div>
+		</div>
+		<br />
+		<a style="float:right;" href="levelone.html">Play Game &gt;</a>
+		<br /><br />
+		<a style="float:right;" href="levelselect.html">Level Select &gt;</a>
+		<br /><br /><br />
+		<script type="text/javascript">
+			function canvas1() {
+			var c = document.getElementById("controlCanvas");
+			var ctx = c.getContext("2d");
+			var x = 180;
+			var y = 180;
+			var myVelocity = 30;
+			var rebalanceClickCount = 0;
+			ctx.fillStyle = "blue";
+			ctx.font = "20px Verdana";
+			ctx.fillText("CLICK TO START...", 100, 150);
+			c.addEventListener("click", rebalanceClickCountHolder, false);
+			function rebalanceClickCountHolder() {
+				if (rebalanceClickCount == 0) {
+					startSpeed();
+				}
+			}
+			function startSpeed() {
+				document.getElementById("instruction").innerHTML = "Press the left arrow key to move left.";
+				rebalanceClickCount = 1;
+				ctx.clearRect(0, 0, 390, 390);
+				ctx.fillStyle = "red";
+				ctx.fillRect(180, 180, 30, 30);
+				addEventListener("keydown", myAnimate, false);
+				function myAnimate() {
+					if (event.keyCode === 37) {
+						event.preventDefault();
+						if (x != 0) {
+							x -= myVelocity;
+							ctx.fillStyle = "red";
+							ctx.fillRect(x, y, 30, 30);
+							ctx.clearRect(x + myVelocity, y, 30, 30);
+							document.getElementById("instruction").innerHTML = "Very good! <br /> Press the right arrow key to move right.";
+						}
+					}
+					if (event.keyCode === 38) {
+						event.preventDefault();
+						if (y != 0) {
+							y -= myVelocity;
+							ctx.fillStyle = "red";
+							ctx.fillRect(x, y, 30, 30);
+							ctx.clearRect(x, y + myVelocity, 30, 30);
+							document.getElementById("instruction").innerHTML = "Nice! <br /> Press the down arrow key to move down.";
+						}
+					}
+					if (event.keyCode === 39) {
+						event.preventDefault();
+						if (x != 360) {
+							x += myVelocity;
+							ctx.fillStyle = "red";
+							ctx.fillRect(x, y, 30, 30);
+							ctx.clearRect(x - myVelocity, y, 30, 30);
+							document.getElementById("instruction").innerHTML = "Good job! <br /> Press the up arrow key to move up.";
+						}
+					}
+					if (event.keyCode === 40) {
+						event.preventDefault();
+						if (y != 360) {
+							y += myVelocity;
+							ctx.fillStyle = "red";
+							ctx.fillRect(x, y, 30, 30);
+							ctx.clearRect(x, y - myVelocity, 30, 30);
+							document.getElementById("instruction").innerHTML = "Congratulations! <br /> You've completed the tutorial. <br /> Scroll down to continue.";
+							removeEventListener("keydown", myAnimate, false);
+							canvas2();
+						}
+					}
+				}
+			}
+			}
+			canvas1();
+			function canvas2() {
+			var c = document.getElementById("speedCanvas");
+			var ctx = c.getContext("2d");
+			var x = 180;
+			var y = 180;
+			var myVelocity = 30;
+			var rebalanceClickCount = 0;
+			ctx.fillStyle = "blue";
+			ctx.font = "20px Verdana";
+			ctx.fillText("CLICK TO START...", 100, 150);
+			c.addEventListener("click", rebalanceClickCountHolder2, false);
+			function rebalanceClickCountHolder2() {
+				if (rebalanceClickCount == 0) {
+					startSpeed2();
+				}
+			}
+			function startSpeed2() {
+				document.getElementById("instruction2").innerHTML = "Change your keyboard settings so <br /> that when a key is held, <br /> it goes at the same rate as <br /> the green square.";
+				rebalanceClickCount = 1;
+				ctx.clearRect(0, 0, 390, 390);
+				ctx.fillStyle = "red";
+				ctx.fillRect(180, 180, 30, 30);
+				addEventListener("keydown", myAnimate, false);
+				function myAnimate() {
+					if (event.keyCode === 37) {
+						event.preventDefault();
+						if (x != 0) {
+							x -= myVelocity;
+							ctx.fillStyle = "red";
+							ctx.fillRect(x, y, 30, 30);
+							ctx.clearRect(x + myVelocity, y, 30, 30);
+						}
+					}
+					if (event.keyCode === 38) {
+						event.preventDefault();
+						if (y != 0) {
+							y -= myVelocity;
+							ctx.fillStyle = "red";
+							ctx.fillRect(x, y, 30, 30);
+							ctx.clearRect(x, y + myVelocity, 30, 30);
+						}
+					}
+					if (event.keyCode === 39) {
+						event.preventDefault();
+						if (x != 780) {
+							x += myVelocity;
+							ctx.fillStyle = "red";
+							ctx.fillRect(x, y, 30, 30);
+							ctx.clearRect(x - myVelocity, y, 30, 30);
+						}
+					}
+					if (event.keyCode === 40) {
+						event.preventDefault();
+						if (y != 780) {
+							y += myVelocity;
+							ctx.fillStyle = "red";
+							ctx.fillRect(x, y, 30, 30);
+							ctx.clearRect(x, y - myVelocity, 30, 30);
+						}
+					}
+				}
+				var Xpos = 0;
+				var Ypos = 0;
+				var Xpos2 = 780;
+				var Ypos2 = 0;
+				function Tutorial() {
+				Xpos = 0;
+				Ypos = 0;
+				var id = setInterval(myCompare, 100);
+				function myCompare() {
+					ctx.fillStyle = "#00AA22";
+					ctx.fillRect(Xpos, Ypos, 30, 30);
+					ctx.clearRect(Xpos - 30, Ypos, 30, 30);
+					Xpos += 30;
+					if (Xpos == 780) {
+						ctx.clearRect(Xpos - 30, Ypos, 30, 30);
+						clearInterval(id);
+						Tutorial2();
+					}
+				}
+				}
+				function Tutorial2() {
+				Xpos2 = 780;
+				Ypos2 = 0;
+				var id2 = setInterval(myCompare2, 100);
+				function myCompare2() {
+					ctx.fillStyle = "#00AA22";
+					ctx.fillRect(Xpos2, Ypos2, 30, 30);
+					ctx.clearRect(Xpos2 + 30, Ypos2, 30, 30);
+					Xpos2 -= 30;
+					if (Xpos2 == 0) {
+						ctx.clearRect(Xpos2 + 30, Ypos2, 30, 30);
+						clearInterval(id2);
+						Tutorial();
+					}
+				}
+				}
+				Tutorial();
+			}
+			}
+		</script>
+	</body>
+</html>
