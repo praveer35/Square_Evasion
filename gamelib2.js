@@ -5,7 +5,6 @@ var collectEffect = document.getElementById("collectAudio");
 var musicEffect = document.getElementById("backgroundAudio");
 musicEffect.loop = true;
 musicEffect.volume = 0.4;
-musicEffect.play();
 // ------------------------	//
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -27,6 +26,7 @@ ctx.fillRect(centerX, centerY, 30, 30);
 //addEventListener("keydown", myWall, false);
 addEventListener("keydown", myKey, false);
 function myKey() {
+	musicEffect.play();
 	if (event.keyCode === 37) {
 		event.preventDefault();
 		x -= myVelocity;

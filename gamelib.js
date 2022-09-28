@@ -5,7 +5,10 @@ var collectEffect = document.getElementById("collectAudio");
 var musicEffect = document.getElementById("backgroundAudio");
 musicEffect.loop = true;
 musicEffect.volume = 0.4;
-musicEffect.play();
+window.onload = function() {
+    musicEffect.play();
+}
+
 // ------------------------	//
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -37,6 +40,7 @@ var squareSize = 30;
 ctx.fillStyle = "red";
 ctx.fillRect(x, y, squareSize, squareSize);
 function myKey() {
+	musicEffect.play();
 	ctx.fillStyle = "red";
 	if (event.keyCode === 37) {
 		event.preventDefault();

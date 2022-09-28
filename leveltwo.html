@@ -51,7 +51,6 @@
 			var musicEffect = document.getElementById("backgroundAudio");
 			musicEffect.loop = true;
 			musicEffect.volume = 0.4;
-			musicEffect.play();
 			var T = 0;
 			var t = 0;
 			var timeScore = setInterval(myTime, 100);
@@ -74,6 +73,7 @@
 			var ctx = c.getContext("2d");
 			var myVelocity = 30;
 			function myAnimation() {
+				musicEffect.play();
 				//ctx.clearRect(0, 0, 990, 690);
 				if (event.keyCode === 37) {
 					event.preventDefault();

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Square Evasion: LVL 11</title>
+		<link rel="stylesheet" type="text/css" href="gamelib.css">
+	</head>
+	<body>
+		<h1>Level 11 - "In the Sky"</h1>
+		<hr />
+		<canvas style="background-color:lightblue" id="myCanvas" width="990" height="690"></canvas>
+		<audio id="myAudio">
+  			<source src="crasheffect.wav" type="audio/wav">
+  			<source src="crasheffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="victoryAudio">
+  			<source src="wineffect.mp3" type="audio/mpeg">
+  			Your browser does not support the audio element.
+		</audio>
+		<audio id="backgroundAudio">
+			<source src="backmusic3.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="collectAudio">
+			<source src="collecteffect.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<br />
+		<a style="float:left;" href="tutorial.html">&lt; Tutorial</a>
+		<span id="xinfo"></span>
+		<span id="yinfo"></span>
+		<br /><br />
+		<a style="float:left;" href="index.html">&lt; Home Page</a>
+        <a style="float:right;" href="levelselect.html">Level Select &gt;</a>
+		<script type="text/javascript">
+			//Start Positions
+			var x = 0;
+			var y = 0;
+		</script>
+		<script type="text/javascript" src="gamelib.js">
+		</script>
+		<script type="text/javascript">
+			function myLink() {
+				setTimeout(function() { window.location.replace("leveleleven.html"); }, 1500);
+			}
+			myTimeArea(770, 0);
+            myWall(750, 0, 990, 60);
+            myWall(750, 210, 960, 240);
+            myWall(750, 60, 780, 210);
+            myWall(810, 270, 990, 300);
+            myWall(750, 270, 780, 690);
+            myWall(960, 270, 990, 660);
+            myWall(780, 330, 930, 360);
+            myWall(810, 390, 960, 420);
+            myWall(780, 450, 930, 480);
+            myWall(810, 510, 960, 540);
+            myWall(780, 570, 930, 600);
+            myWall(810, 630, 960, 660);
+            let SPEED = 13;
+            movingEnemyY(30, 0, 660, SPEED);
+            movingEnemyY(60, 660, 0, SPEED);
+            movingEnemyY(90, 0, 660, SPEED);
+            movingEnemyY(330, 0, 660, SPEED);
+            movingEnemyY(360, 660, 0, SPEED);
+            movingEnemyY(390, 0, 660, SPEED);
+            movingEnemyY(630, 0, 660, SPEED);
+            movingEnemyY(660, 660, 0, SPEED);
+            movingEnemyY(690, 0, 660, SPEED);
+            movingEnemyX(0, 30, 720, SPEED);
+            movingEnemyX(720, 60, 0, SPEED);
+            movingEnemyX(0, 90, 720, SPEED);
+            movingEnemyX(0, 270, 720, SPEED);
+            movingEnemyX(720, 300, 0, SPEED);
+            movingEnemyX(0, 330, 720, SPEED);
+            movingEnemyX(0, 510, 720, SPEED);
+            movingEnemyX(720, 540, 0, SPEED);
+            movingEnemyX(0, 570, 720, SPEED);
+            movingEnemyY(810, 60, 180, 100);
+            movingEnemyX(780, 90, 960, 150);
+            myCoin(210, 180);
+            myCoin(210, 420);
+            myCoin(510, 180);
+            myCoin(510, 420);
+            myCoin(780, 60);
+			mySucceed(960, 660, 50, 65, 80, 100, 5, 11);
+		</script>
+	</body>
+</html>
